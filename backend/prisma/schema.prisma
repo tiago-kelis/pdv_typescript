@@ -1,15 +1,90 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id          String @id @default(uuid())
+  name        String
+  email       String  @unique
+  telefone    String
+  cep         String
+  endereco    String
+  numero      Int
+  complemento String
+  bairro      String
+  cidade      String
+  estado      String
+  funcionarios Funcionario[] @relation("ClienteFuncionarios")
+  Venda       Venda[]
+}
+
+model Fornecedor {
+  id          String @id @default(uuid())
+  name        String
+  email       String  @unique
+  telefone    String
+  cnpj        String  @unique
+  endereco    String
+  numero      Int
+  complemento String
+  bairro      String
+  cidade      String
+  estado      String
+  Produto     Produto[]
+}
+
+model Funcionario {
+  id           String @id @default(uuid())
+   name        String
+  email       String  @unique
+  telefone    String
+  cep         String
+  endereco    String
+  numero      Int
+  complemento String
+  bairro      String
+  cidade      String
+  estado      String
+  senha        String
+  cargo        String
+  nivel_acesso String
+  cliente_id   String
+  Cliente      Cliente @relation("ClienteFuncionarios", fields: [cliente_id], references: [id])
+}
+
+model ItemVenda {
+  id         String @id @default(uuid())
+  qtd        Int
+  subtotal   Float
+  produto_id String
+  venda_id   String
+  Produto    Produto @relation(fields: [produto_id], references: [id])
+  Venda      Venda   @relation(fields: [venda_id], references: [id])
+}
+
+model Produto {
+  id            String @id @default(uuid())
+  name          String
+  preco         Float
+  qtd_estoque   Int
+  fornecedor_id String
+  Fornecedor    Fornecedor @relation(fields: [fornecedor_id], references: [id])
+  ItemVenda   ItemVenda[]
+}
+
+model Venda {
+  id          String @id @default(uuid())
+  data        DateTime
+  total_venda Float
+  observacoes String?
+  cliente_id  String
+  Cliente     Cliente @relation(fields: [cliente_id], references: [id])
+  ItemVenda   ItemVenda[]
 }

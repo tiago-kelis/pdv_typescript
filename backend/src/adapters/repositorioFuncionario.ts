@@ -33,7 +33,6 @@ class RepositorioFuncionario {
        }
     }
 
-
     async buscarTodos() {
         try {
             return await this.repo.funcionario.findMany();

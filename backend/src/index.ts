@@ -6,6 +6,6 @@ app.get("/", (req, resp) => {
     resp.send("Backend rodando");
 })
 
-app.listen(3000, () => {
-    console.log("serving run pot: 3000");    
+app.listen(process.env.PORT || 3000, () => {
+    console.log("serving run port: 3000");    
 })

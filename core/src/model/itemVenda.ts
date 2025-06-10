@@ -1,7 +1,7 @@
 export interface ItemVenda {
     id: string
-    qtd: Number
-    subtotal: Number
+    qtd: number
+    subtotal: number
     produto_id: string
     venda_id: string
 }

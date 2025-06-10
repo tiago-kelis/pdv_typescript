@@ -1,7 +1,7 @@
 export interface Produto {
     id: string
     name: string
-    preco: Number
-    qtd_estoque: Number
-    fornecedor_id: Number
+    preco: number
+    qtd_estoque: number
+    fornecedor_id: number
 }

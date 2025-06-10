@@ -5,7 +5,7 @@ export interface Fornecedores {
     telefone: string
     cnpj: string
     endereco: string
-    numero: Number
+    numero: number
     complemeto: string
     bairro: string
     cidade: string

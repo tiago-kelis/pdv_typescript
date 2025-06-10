@@ -5,8 +5,8 @@ export interface Cliente {
     telefone: string
     cep: string
     endereco: string
-    numero: Number
-    complemeto: string
+    numero: number
+    complemento: string
     bairro: string
     cidade: string
     estado: string
